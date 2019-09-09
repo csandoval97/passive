@@ -1,0 +1,80 @@
+<form class="fixedSize">
+    <div *ngIf="counter == 0">
+        <div class="form-row">
+            <div clsas="form-group col-6">
+                <label>Basic Information: {{newUser.basicInformation}}</label>
+                <div class="form-check">
+                    <input type="radio" [(ngModel)]="newUser.basicInformation" value="New Member"  name="basicInfo" class="form-check-input">
+                    <label>New Member </label>
+                    
+                </div>
+                <div class="form-check">
+                    <input type="radio" [(ngModel)]="newUser.basicInformation" value="Renew Membership" name="basicInfo" class="form-check-input">
+                    <label>Renew Membership</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label>FirstName</label>
+                <input type="text" class="form-control" [(ngModel)]="newUser.firstName" name="firstName">
+            </div>
+            <div class="form-group col-6">
+                <label>LastName</label>
+                <input type="text" class="form-control" [(ngModel)]="newUser.lastName" name="lastName">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label>Nickname</label>
+                <input type="text" class="form-control" [(ngModel)]="newUser.preferredName" name="nickname">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label>UIC NetID</label>
+                <input type="text" class="form-control" [(ngModel)]="newUser.netid" name="netid">
+            </div>
+            <div class="form-group col-6">
+                <label>UIN</label>
+                <input type="text" class="form-control" [(ngModel)]="newUser.uin" name="uin">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label>Non-UIC Email</label>
+                <input type="text" class="form-control" [(ngModel)]="newUser.nonUICEmailAddress" name="nonEmail">
+            </div>
+            <div class="form-group col-6">
+                <label>Phone Number</label>
+                <input type="text" class="form-control" [(ngModel)]="newUser.phone" name="phone">
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="counter == 1">
+        <div class="form-row">
+            <div class="form-group col-4">
+                <label>What year in school are you</label>
+                <select class="form-control">
+                    <option *ngFor="let y of year" [value]="y">{{y}}</option>
+                </select>
+            </div>
+            <div class="form-group col-4">
+                <label>College</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-4">
+                    <label>Major</label>
+                    <input type="text" class="form-control">
+                </div>
+        </div>
+
+    </div>
+</form>
+<footer>
+        <button (click)="backCounter()">Back</button>
+        <button (click)="nextCounter()">Next</button>
+</footer>
+
+
