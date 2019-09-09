@@ -56,25 +56,110 @@
         <div class="form-row">
             <div class="form-group col-4">
                 <label>What year in school are you</label>
-                <select class="form-control">
+                <select class="form-control" [(ngModel)]="newUser.schoolYear" name="schoolYear">
                     <option *ngFor="let y of year" [value]="y">{{y}}</option>
                 </select>
             </div>
             <div class="form-group col-4">
                 <label>College</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="newUser.college" name="college">
             </div>
             <div class="form-group col-4">
-                    <label>Major</label>
-                    <input type="text" class="form-control">
-                </div>
+                <label>Major</label>
+                <input type="text" class="form-control" [(ngModel)]="newUser.major" name="major">
+            </div>
         </div>
-
+        <div class="form-row">
+            <div class="form-group col-4">
+                <label>Commute to campus</label>
+                <div class="form-check" *ngFor="let c of commute"> 
+                        <input type="radio"  [(ngModel)]="newUser.commute" name="commute" value={{c}}>
+                        <label> &nbsp; {{c}}</label>
+                </div>
+                
+            </div>
+            <div class="form-group col-4">
+                <label>Would you like to participate in the ACM Resume book?</label>
+                <div class="form-check">
+                    <input type="radio" name="participate">
+                    <label>Yes</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="participate">
+                    <label>No</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>How many internships have you had?</label>
+                <div class="form-check" *ngFor="let num of [0,1,2,3]">
+                    <input type="radio" [(ngModel)]="newUser.internship" name="internshipNum" value={{num}}>
+                    <label>{{num}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label>How many credit hours are you taking this semester?</label>
+                <input type="text" class="form-control" [(ngModel)]="newUser.credit" name="credit">
+            </div>
+            <div class="form-group col-6">
+                <label>What programming languages are you familiar with?</label>
+                <input type="text" class="form-control" [(ngModel)]="newUser.programmingLanguages" name="languages">
+            </div>
+        </div>
     </div>
+    <div *ngIf="counter == 2">
+        <div class="form-row">
+            <div class="form-group col-4">
+                <label>What are your interest in computer science?</label>
+                <div class="form-check" *ngFor="let i of interest">
+                    <input type="checkbox">
+                    <label>{{i}}</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox">
+                    <label>Other:</label>
+                    <input type="text" class="in-line">
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label>What SIGS are you interested in?</label>
+                <div class="form-check" *ngFor="let s of sigs">
+                    <input type="checkbox">
+                    <label>{{s}}</label>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label>What SIGS are you interested in?</label>
+                <div class="form-check" *ngFor="let s of sigs">
+                    <input type="checkbox">
+                    <label>{{s}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-8">
+                <label>If ACM were to host a major event (open to other schools),
+                        which events would you be interested in?</label>
+                <div class="form-check" *ngFor="let m of majorEvents">
+                    <input type="checkbox">
+                    <label>{{m}}</label>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label>I Would be interested in competing in</label>
+                <div class="form-check" *ngFor="let c of competition">
+                    <input type="checkbox">
+                    <label>{{c}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button (click)="backCounter()" [disabled]="counter<=0" class="btn btn-danger">Back</button>
+    <label>&nbsp; {{counter + 1}} of 5 pages done &nbsp; </label>
+    <button (click)="nextCounter()" [disabled]="counter>3" class="btn btn-success">Next</button>
 </form>
-<footer>
-        <button (click)="backCounter()">Back</button>
-        <button (click)="nextCounter()">Next</button>
-</footer>
+
 
 
