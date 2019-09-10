@@ -1,1 +1,44 @@
+img{
+    width: 65%;
+}
+form{
+    background-color: #e7cc7f;
+    width: 70%;
+    padding-bottom: 4%;
+    margin: 5%;
+}
+/* form> div div:not(h1){
+    padding-left:1%;
+} */
+form>h1{
+    background-color:#a4893d;
+    color:rgb(255, 254, 234);
+    padding:1%;
+    margin:0;
+}
 
+form >div>h1.display-5{
+    background-color:rgb(255, 101, 101);
+    color:white;
+    margin:0;
+    padding:1%;
+}
+form>div div:not(.form-box){
+    padding-left:1%;
+    padding-right:1%;
+}
+form > div p{
+    padding-left:2%;
+    padding-right:2%;
+
+}
+form > div > input{
+    padding:2%;
+    margin:2%;
+}
+form>div> div.form-check{
+    width: 55%;
+    background-color: #f0e5c6;
+    transform: scale(1.5);
+    margin:5%;
+}

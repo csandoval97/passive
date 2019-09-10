@@ -1,15 +1,16 @@
-<form class="fixedSize">
-    <div *ngIf="counter == 0">
+<form>
+    <h1 class="display-4"><span style="color:#ff3a22">ACM</span> Membership SignUp</h1>
+    <div class="form-box" *ngIf="counter == 0">
+        <h1 class="display-5">Personal Info</h1>
         <div class="form-row">
-            <div clsas="form-group col-6">
-                <label>Basic Information: {{newUser.basicInformation}}</label>
+            <div class="form-group col-12">
+                <label>Basic Information</label>
                 <div class="form-check">
-                    <input type="radio" [(ngModel)]="newUser.basicInformation" value="New Member"  name="basicInfo" class="form-check-input">
+                    <input type="radio" [(ngModel)]="newUser.basicInformation" value="New Member"  name="basicInfo">
                     <label>New Member </label>
-                    
                 </div>
                 <div class="form-check">
-                    <input type="radio" [(ngModel)]="newUser.basicInformation" value="Renew Membership" name="basicInfo" class="form-check-input">
+                    <input type="radio" [(ngModel)]="newUser.basicInformation" value="Renew Membership" name="basicInfo">
                     <label>Renew Membership</label>
                 </div>
             </div>
@@ -52,7 +53,8 @@
         </div>
     </div>
 
-    <div *ngIf="counter == 1">
+    <div class="form-box" *ngIf="counter == 1">
+        <h1 class="display-5">Information about you</h1>
         <div class="form-row">
             <div class="form-group col-4">
                 <label>What year in school are you</label>
@@ -108,7 +110,8 @@
             </div>
         </div>
     </div>
-    <div *ngIf="counter == 2">
+    <div class="form-box" *ngIf="counter == 2">
+        <h1 class="display-5">Member Demographic Survey</h1>
         <div class="form-row">
             <div class="form-group col-4">
                 <label>What are your interest in computer science?</label>
@@ -119,7 +122,7 @@
                 <div class="form-check">
                     <input type="checkbox">
                     <label>Other:</label>
-                    <input type="text" class="in-line">
+                    <input type="text" class="in-line col-6">
                 </div>
             </div>
             <div class="form-group col-4">
@@ -155,10 +158,51 @@
             </div>
         </div>
     </div>
+    <div class="form-box" *ngIf="counter == 3" align="center">
+        <h1 class="display-5">Some special information for you!</h1>
+        <p class="col-6" >  We have a slack! What's that? It's a online group of ACM's
+             chat rooms (Similar to IRC or Group messages). People 
+             can usually answer your ACM related questions.  Users on 
+             ACM's Slack frequently use it for casual/semi-professional 
+             discussion about cool CS factoids, breaking news, SIG and 
+             group information, general discussion, and conversing with 
+             fellow ACM friends. If you have your UIC email you can sign
+             up at <a target="_blank" rel="noopener noreferrer" href="https://uicacm.slack.com/">uicacm.slack.com/</a> (Don't worry you'll get this information
+             again at the end)
+        </p>
+        <img src='assets/image.png'>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input">
+            <label >Check box if you totaly read that</label>
+        </div>            
+    </div>
+    <div class="form-box" *ngIf="counter == 4">
+        <h1 class="display-5">Payment Receipt</h1>
+        <p>You can sign up for National membership or just UIC membership.</p>
 
-    <button (click)="backCounter()" [disabled]="counter<=0" class="btn btn-danger">Back</button>
-    <label>&nbsp; {{counter + 1}} of 5 pages done &nbsp; </label>
-    <button (click)="nextCounter()" [disabled]="counter>3" class="btn btn-success">Next</button>
+        <p>UIC memberships last till the end of that school year and cost $10. 
+            A receipt will be issued to you once you pay the membership dues.  Please KEEP your 
+            receipt; this is the proof you have paid your dues for the school year and is required 
+            to complete this form.</p>
+        
+        <p>National memberships are 1 year from the date of signing up.
+            The ACM@UIC honors national memberships at no additional charge to national members.</p>
+            
+        <p>You can sign up for an ACM national student membership for $19.00 at
+            <a target="_blank" rel="noopener noreferrer" href="https://services.acm.org/public/qj/quickjoin/qj_control.cfm?promo=PWEBTOP&form_type=Student">https://services.acm.org/public/qj/quickjoin/qj_control.cfm?promo=PWEBTOP&form_type=Student</a>.</p>
+        <p>You will receive an email with a member ID which you should provide below.</p>
+
+        <p><b>If you paid with cash, Please enter you Receipt number in the box below. If you are 
+            a National member, enter your National ACM membership ID below. 
+        </b></p>
+        <input type="text" class="form-control col-6">
+    </div>
+    <div align="center" style="margin-top:5%">
+        <button (click)="backCounter()" [disabled]="counter<=0" class="btn btn-danger">Back</button>
+        <label>&nbsp; {{counter + 1}} of 5 pages done &nbsp; </label>
+        <button (click)="nextCounter()" class="form-box" *ngIf="counter<4" class="btn btn-success">Next</button>
+        <button (click)="onSubmit()" class="form-box" *ngIf="counter==4" class="btn btn-success">Submit</button>
+    </div>
 </form>
 
 
