@@ -5,7 +5,7 @@ form{
     background-color: #e7cc7f;
     width: 70%;
     padding-bottom: 4%;
-    margin: 5%;
+    margin: 4% auto;
 }
 /* form> div div:not(h1){
     padding-left:1%;
