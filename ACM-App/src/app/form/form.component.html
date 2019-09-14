@@ -113,46 +113,39 @@
     <div class="form-box" *ngIf="counter == 2">
         <h1 class="display-5">Member Demographic Survey</h1>
         <div class="form-row">
-            <div class="form-group col-4">
+            <div class="form-group col-6">
                 <label>What are your interest in computer science?</label>
                 <div class="form-check" *ngFor="let i of interest">
-                    <input type="checkbox">
+                    <input type="checkbox" class="form-check-input">
                     <label>{{i}}</label>
                 </div>
                 <div class="form-check">
-                    <input type="checkbox">
+                    <input type="checkbox" class="form-check-input">
                     <label>Other:</label>
                     <input type="text" class="in-line col-6">
                 </div>
             </div>
-            <div class="form-group col-4">
+            <div class="form-group col-6">
                 <label>What SIGS are you interested in?</label>
                 <div class="form-check" *ngFor="let s of sigs">
-                    <input type="checkbox">
-                    <label>{{s}}</label>
-                </div>
-            </div>
-            <div class="form-group col-4">
-                <label>What SIGS are you interested in?</label>
-                <div class="form-check" *ngFor="let s of sigs">
-                    <input type="checkbox">
+                    <input type="checkbox" class="form-check-input">
                     <label>{{s}}</label>
                 </div>
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-8">
+            <div class="form-group col-6">
                 <label>If ACM were to host a major event (open to other schools),
                         which events would you be interested in?</label>
                 <div class="form-check" *ngFor="let m of majorEvents">
-                    <input type="checkbox">
+                    <input type="checkbox" class="form-check-input">
                     <label>{{m}}</label>
                 </div>
             </div>
             <div class="form-group col-4">
                 <label>I Would be interested in competing in</label>
                 <div class="form-check" *ngFor="let c of competition">
-                    <input type="checkbox">
+                    <input type="checkbox" class="form-check-input">
                     <label>{{c}}</label>
                 </div>
             </div>
