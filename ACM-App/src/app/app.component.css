@@ -1,0 +1,11 @@
+nav > a > img{
+    width:4rem;
+    margin:0;
+    padding:0;
+}
+nav{
+    background-image: linear-gradient(to bottom, rgb(0, 0, 0), rgb(58, 70, 175));
+}
+nav > div > ul > li>a{
+    color:white;
+}
