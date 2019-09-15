@@ -5,13 +5,14 @@ form{
     background-color: #e7cc7f;
     width: 70%;
     padding-bottom: 4%;
-    margin: 4% auto;
+    margin: 2rem auto;
 }
 /* form> div div:not(h1){
     padding-left:1%;
 } */
 form>h1{
     background-color:#a4893d;
+    background-image: linear-gradient(to bottom,#967b33, #c5ab64);
     color:rgb(255, 254, 234);
     padding:1%;
     margin:0;
@@ -24,8 +25,8 @@ form >div>h1.display-5{
     padding:1%;
 }
 form>div div:not(.form-box){
-    /* padding-left:1%; */
-    /* padding-right:1%; */
+    padding-left:1.5%;
+    padding-right:1.5%;
 }
 form > div p{
     padding-left:2%;
