@@ -1,16 +1,17 @@
 name: Build ASP.NET Core App
-on: [push, pull_request]
+on: [ push, pull_request ]
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet: [ '2.2.7', '3.0.0-rc1' ]
-    name: Using .NET Core V${{ matrix.dotnet }} 
     steps:
       - uses: actions/checkout@master
+      - name: Setup node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: ${{ matrix.dotnet }}
+          dotnet-version: 3.0.100-rc1-014190
       - run: dotnet build
+      - run: dotnet publish
