@@ -37,24 +37,9 @@ namespace passive.Controllers
             .ToArray();
         }
 
-
-// "userName": "passivetest2",
-// "userPassword": "IceIceBaby123",
-// "UIN": "",
-// "major": "",
-// "college": "",
-// "email": "",
-// "title": "",
-// "phoneNumber": "",
-// "firstName": "",
-// "lastName": "",
-// "membershipNumber": "",
-// "memberType": "",
-// "otherData": ""
         [HttpPost]
         public string Post([FromBody]ACMAD.User user) {
             new ACMAD.AD();
-
             return ACMAD.User.NewMember(user);
         }
     }

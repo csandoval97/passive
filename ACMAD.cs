@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.DirectoryServices;
 using System.DirectoryServices.ActiveDirectory;
 using System.DirectoryServices.AccountManagement;
@@ -7,21 +8,24 @@ namespace passive.ACMAD
 {
     public class AD
     {
-        public AD () {
-AD.Host = System.Environment.GetEnvironmentVariable("PASSIVE_AD_HOST");
-AD.User = System.Environment.GetEnvironmentVariable("PASSIVE_AD_USER");
-AD.Password = System.Environment.GetEnvironmentVariable("PASSIVE_AD_PASSWORD");
-AD.Domain = "acm.cs";
-AD.BaseDN = "dc=acm,dc=cs";
-AD.PaidGroup = "OU=ACMPaid,OU=ACMGroups";
-AD.NotPaidGroup = "OU=ACMNotPaid,OU=ACMGroups";
-AD.DefunctGroup = "OU=ACMDefunct,OU=ACMGroups";
+        public AD()
+        {
+            AD.Host = System.Environment.GetEnvironmentVariable("PASSIVE_AD_HOST");
+            AD.User = System.Environment.GetEnvironmentVariable("PASSIVE_AD_USER");
+            AD.Password = System.Environment.GetEnvironmentVariable("PASSIVE_AD_PASSWORD");
+            AD.Domain = "acm.cs";
+            AD.BaseDN = "DC=acm,DC=cs";
+            AD.UsersOU = "OU=ACMUsers";
+            AD.PaidGroup = "CN=ACMPaid,OU=ACMGroups";
+            AD.NotPaidGroup = "CN=ACMNotPaid,OU=ACMGroups";
+            AD.DefunctGroup = "CN=ACMDefunct,OU=ACMGroups";
         }
         public static string Host;
         public static string Domain;
         public static string User;
         public static string Password;
         public static string BaseDN;
+        public static string UsersOU;
         public static string PaidGroup;
         public static string NotPaidGroup;
         public static string DefunctGroup;
@@ -140,22 +144,53 @@ AD.DefunctGroup = "OU=ACMDefunct,OU=ACMGroups";
         public string memberType { get; set; }
         public string otherData { get; set; }
 
+        public static void createOU(string name, string path)
+        {
+            try
+            {
+                DirectoryEntry ouEntry = new DirectoryEntry(AD.Host + "/" + name + "," + path, AD.User, AD.Password);
+                var test = ouEntry.Guid;
+            }
+            catch (System.DirectoryServices.DirectoryServicesCOMException)
+            {
+                DirectoryEntry baseEntry = new DirectoryEntry(AD.Host + "/" + path, AD.User, AD.Password);
+                baseEntry = baseEntry.Children.Add(name, "OrganizationalUnit");
+                baseEntry.CommitChanges();
+                baseEntry.Close();
+            }
+        }
+
         public static string NewMember(User user)
         {
             string userDn = string.Empty;
             try
             {
-
                 string[] months = new string[] { "", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-                string ldapPath = "OU=" + months[DateTime.Now.Month] + ",OU=" + DateTime.Now.Year.ToString() + ",OU=ACMUsers";
-                string connectionString = AD.Host + "/" + ldapPath + "," + AD.BaseDN;
-                DirectoryEntry dirEntry = new DirectoryEntry(connectionString, AD.User, AD.Password);
+                string month = "OU=" + months[DateTime.Now.Month];
+                string year = "OU=" + DateTime.Now.Year.ToString();
+
+                string connectionString = AD.Host + "/" + AD.UsersOU + "," + AD.BaseDN;
+                string monthString = year + "," + AD.UsersOU + "," + AD.BaseDN;
+                string yearString = AD.UsersOU + "," + AD.BaseDN;
+
+                DirectoryEntry testing = new DirectoryEntry(connectionString, AD.User, AD.Password);
+                Console.WriteLine(testing.Path);
+                foreach (DirectoryEntry e in testing.Children) {
+                    Console.WriteLine(e.Path);
+                }
+
+                createOU(year, yearString);
+                createOU(month, monthString);
+
+
+                string userPath = AD.Host + "/" + month + "," + year + "," + AD.UsersOU + "," + AD.BaseDN;
+                DirectoryEntry dirEntry = new DirectoryEntry(userPath, AD.User, AD.Password);
                 DirectoryEntry newUser = dirEntry.Children.Add("CN=" + user.userName, "user");
 
-                newUser.Properties["samAccountName"].Value = user.userName;
+                newUser.Properties["sAMAccountName"].Value = user.userName;
                 newUser.Properties["employeeID"].Value = user.UIN;
                 newUser.Properties["department"].Value = user.major;
-                newUser.Properties["organization"].Value = user.college;
+                newUser.Properties["company"].Value = user.college;
                 newUser.Properties["title"].Value = user.title;
                 newUser.Properties["mail"].Value = user.email;
                 newUser.Properties["telephoneNumber"].Value = user.phoneNumber;
