@@ -38,7 +38,8 @@ namespace passive.Controllers
         }
 
         [HttpPost]
-        public string Post([FromBody]ACMAD.User user) {
+        public string Post([FromBody]ACMAD.User user)
+        {
             new ACMAD.AD();
             return ACMAD.User.NewMember(user);
         }
