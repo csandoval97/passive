@@ -10,16 +10,16 @@ namespace passive.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ACMADController : ControllerBase
+    public class UserController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<ACMADController> _logger;
+        private readonly ILogger<UserController> _logger;
 
-        public ACMADController(ILogger<ACMADController> logger)
+        public UserController(ILogger<UserController> logger)
         {
             _logger = logger;
         }
@@ -41,7 +41,7 @@ namespace passive.Controllers
         public string Post([FromBody]ACMAD.User user)
         {
             new ACMAD.AD();
-            return ACMAD.User.NewMember(user);
+            return ACMAD.User.CreateUserInAD(user);
         }
     }
 }

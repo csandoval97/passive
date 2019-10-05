@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.DirectoryServices;
 using System.DirectoryServices.ActiveDirectory;
 using System.DirectoryServices.AccountManagement;
@@ -14,13 +15,14 @@ namespace passive.ACMAD
             AD.Host = System.Environment.GetEnvironmentVariable("PASSIVE_AD_HOST");
             AD.User = System.Environment.GetEnvironmentVariable("PASSIVE_AD_USER");
             AD.Password = System.Environment.GetEnvironmentVariable("PASSIVE_AD_PASSWORD");
-            AD.Domain = "acm.cs";
-            AD.BaseDN = "DC=acm,DC=cs";
-            AD.UsersOU = "OU=ACMUsers" + "," + AD.BaseDN;
-            AD.GroupsOU = "OU=ACMGroups" + "," + AD.BaseDN;
-            AD.PaidGroup = "CN=ACMPaid" + "," + AD.GroupsOU;
-            AD.NotPaidGroup = "CN=ACMNotPaid" + "," + AD.GroupsOU;
-            AD.DefunctGroup = "CN=ACMDefunct" + "," + AD.GroupsOU;
+            AD.Domain = new List<string>() {System.Environment.GetEnvironmentVariable("PASSIVE_AD_DOMAIN"), "acm.cs"}.FirstOrDefault(e => e != String.Empty);
+            AD.BaseDN = new List<string>() {System.Environment.GetEnvironmentVariable("PASSIVE_AD_BASEDN"), "DC=acm,DC=cs"}.FirstOrDefault(e => e != String.Empty) ;
+            AD.UsersOU = "OU=" + new List<string>() {System.Environment.GetEnvironmentVariable("PASSIVE_AD_USERSOU"), "ACMUsers" }.FirstOrDefault(e => e != String.Empty) + "," + AD.BaseDN;
+            AD.GroupsOU = "OU=" + new List<string>() {System.Environment.GetEnvironmentVariable("PASSIVE_AD_GROUPSOU"), "ACMGroups"}.FirstOrDefault(e => e != String.Empty)  + "," + AD.BaseDN;
+            AD.PaidGroup = "CN=" + new List<string>() {System.Environment.GetEnvironmentVariable("PASSIVE_AD_PAIDGROUP"), "ACMPaid"}.FirstOrDefault(e => e != String.Empty) + "," + AD.GroupsOU;
+            AD.NotPaidGroup = "CN=" + new List<string>() {System.Environment.GetEnvironmentVariable("PASSIVE_AD_NOTPAIDGOUP"), "ACMNotPaid"}.FirstOrDefault(e => e != String.Empty)  + "," + AD.GroupsOU;
+            AD.DefunctGroup = "CN=" + new List<string>() {System.Environment.GetEnvironmentVariable("PASSIVE_AD_DEFUNCTGOUP"), "ACMDefunct"}.FirstOrDefault(e => e != String.Empty)  + "," + AD.GroupsOU;
+            AD.AlumniGroup = "CN=" + new List<string>() {System.Environment.GetEnvironmentVariable("PASSIVE_AD_ALUMNIGROUP"), "ACMAlumni"}.FirstOrDefault(e => e != String.Empty)  + "," + AD.GroupsOU;
         }
         public static string Host;
         public static string Domain;
@@ -32,6 +34,7 @@ namespace passive.ACMAD
         public static string PaidGroup;
         public static string NotPaidGroup;
         public static string DefunctGroup;
+        public static string AlumniGroup;
 
         public static string GetObjectDistinguishedName(string objectName, objectClass objectCls = objectClass.user, returnType returnValue = returnType.distinguishedName)
         {
