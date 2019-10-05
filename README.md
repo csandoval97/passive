@@ -1,6 +1,6 @@
 # Passive
 
-Identity Management for ACM@UIC written in C# and Typescript with .NET Core and Angular.
+Identity Management for ACM@UIC written in C# and Typescript with ASP.NET Core and Angular.
 
 ## Getting Started
 
@@ -9,7 +9,7 @@ Identity Management for ACM@UIC written in C# and Typescript with .NET Core and 
 
 # Configuration
 
-If not running as user with appropriate privleges in AD, the following environment variables are required.
+If not running as user with appropriate privleges in AD on a domain joined machine, the following environment variables are required.
 
 - `PASSIVE_AD_HOST`
 - `PASSIVE_AD_USER`
