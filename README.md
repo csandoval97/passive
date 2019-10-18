@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.
 
+## Docker
+Run `docker build -t acm-uic/passive .` to build the docker image.
+Run `docker run -p 4200:4200 -it acm-uic/passive` to run the app container.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
