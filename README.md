@@ -1,16 +1,27 @@
-# ACM-SignUpForm
-This is an angular8 form that will be used to sign up people for the ACM organization
+# ACMApp
 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.
 
-How to run:
-We are using the angular cli toolkit to run this app.
-If you are familliar with running the angular app, then it should be simple to get started and running it.
+## Development server
 
-If you are new to angular8 and the cli, feel free to look at the Angular documentation: https://cli.angular.io
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## Code scaffolding
 
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-To get started. 
-1 Make sure you have angular-cli installed onto your machine.
-2 Clone this repo onto your local machine
-3 run "ng serve" to run the app on your local machine
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
