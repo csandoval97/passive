@@ -6,11 +6,11 @@
             <div class="form-group col-12">
                 <label>Basic Information</label>
                 <div class="form-check">
-                    <input type="radio" [(ngModel)]="newUser.basicInformation" value="New Member"  name="basicInfo">
+                    <input type="radio" [(ngModel)]="newUser.basicInformation" value="New Member"  name="basicInfo" #basicInfo="ngModel" required>
                     <label>New Member </label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" [(ngModel)]="newUser.basicInformation" value="Renew Membership" name="basicInfo">
+                    <input type="radio" [(ngModel)]="newUser.basicInformation" value="Renew Membership" name="basicInfo" required>
                     <label>Renew Membership</label>
                 </div>
             </div>
@@ -18,57 +18,91 @@
         <div class="form-row">
             <div class="form-group col-6">
                 <label>FirstName</label>
-                <input type="text" class="form-control" [(ngModel)]="newUser.firstName" name="firstName">
+                <input type="text" class="form-control" [(ngModel)]="newUser.firstName" name="firstName" #firstName="ngModel" required #spy>
+                <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+                    firstname is required
+                </div>
             </div>
             <div class="form-group col-6">
                 <label>LastName</label>
-                <input type="text" class="form-control" [(ngModel)]="newUser.lastName" name="lastName">
+                <input type="text" class="form-control" [(ngModel)]="newUser.lastName" name="lastName" #lastName="ngModel" required>
+                <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
+                    lastname is required
+                </div>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-6">
                 <label>Nickname</label>
-                <input type="text" class="form-control" [(ngModel)]="newUser.preferredName" name="nickname">
+                <input type="text" class="form-control" [(ngModel)]="newUser.preferredName" name="nickname" placeholder="optional">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-6">
                 <label>UIC NetID</label>
-                <input type="text" class="form-control" [(ngModel)]="newUser.netid" name="netid">
+                <input type="text" class="form-control" [(ngModel)]="newUser.netid" name="netid" #netid="ngModel" placeholder="@uic.edu" required>
+                <div [hidden]="netid.valid || netid.pristine" class="alert alert-danger">
+                    School netID required
+                </div>
             </div>
             <div class="form-group col-6">
                 <label>UIN</label>
-                <input type="text" class="form-control" [(ngModel)]="newUser.uin" name="uin">
+                <input type="text" class="form-control" [(ngModel)]="newUser.uin" name="uin" #uin="ngModel" required>
+                <div [hidden]="uin.valid || uin.pristine" class="alert alert-danger">
+                    UIN is required
+                </div>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-6">
                 <label>Non-UIC Email</label>
-                <input type="text" class="form-control" [(ngModel)]="newUser.nonUICEmailAddress" name="nonEmail">
+                <input type="text" class="form-control" [(ngModel)]="newUser.nonUICEmailAddress" name="nonEmail" #nonEmail="ngModel" required>
+                <div [hidden]="nonEmail.valid || nonEmail.pristine" class="alert alert-danger">
+                    non-uic email required
+                </div>
             </div>
             <div class="form-group col-6">
                 <label>Phone Number</label>
-                <input type="text" class="form-control" [(ngModel)]="newUser.phone" name="phone">
+                <input type="text" class="form-control" [(ngModel)]="newUser.phone" name="phone" #phone="ngModel" required>
+                <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
+                    phonenumber required
+                </div>
             </div>
+        </div>
+        <div align="center" style="margin-top:5%">
+            <button (click)="backCounter()" [disabled]="counter<=0" class="btn btn-danger">Back</button>
+            <label>&nbsp; {{counter + 1}} of 5 pages done &nbsp; </label>
+            <button (click)="nextCounter()" [disabled]="basicInfo.pristine || firstName.invalid || lastName.invalid || netid.invalid || uin.invalid || nonEmail.invalid || phone.invalid " class="form-box" class="btn btn-success">Next</button>
         </div>
     </div>
 
+
+    
     <div class="form-box" *ngIf="counter == 1">
         <h1 class="display-5">Information about you</h1>
         <div class="form-row">
             <div class="form-group col-4">
                 <label>What year in school are you</label>
-                <select class="form-control" [(ngModel)]="newUser.schoolYear" name="schoolYear">
+                <select class="form-control" [(ngModel)]="newUser.schoolYear" name="schoolYear" #schoolYear="ngModel" required>
                     <option *ngFor="let y of year" [value]="y">{{y}}</option>
                 </select>
+                <div [hidden]="schoolYear.valid || schoolYear.pristine" class="alert alert-danger">
+                    SchoolYear required
+                </div>
             </div>
             <div class="form-group col-4">
                 <label>College</label>
-                <input type="text" class="form-control" [(ngModel)]="newUser.college" name="college">
+                <input type="text" class="form-control" [(ngModel)]="newUser.college" name="college" #college="ngModel" required>
+                <div [hidden]="college.valid || college.pristine" class="alert alert-danger">
+                    college required
+                </div>
             </div>
             <div class="form-group col-4">
                 <label>Major</label>
-                <input type="text" class="form-control" [(ngModel)]="newUser.major" name="major">
+                <input type="text" class="form-control" [(ngModel)]="newUser.major" name="major" #major="ngModel" required>
+                <div [hidden]="major.valid || major.pristine" class="alert alert-danger">
+                    major required
+                </div>
             </div>
         </div>
         <div class="form-row">
@@ -83,11 +117,11 @@
             <div class="form-group col-4">
                 <label>Would you like to participate in the ACM Resume book?</label>
                 <div class="form-check">
-                    <input type="radio" name="participate">
+                    <input type="radio" name="participate" >
                     <label>Yes</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" name="participate">
+                    <input type="radio" name="participate" >
                     <label>No</label>
                 </div>
             </div>
@@ -102,12 +136,23 @@
         <div class="form-row">
             <div class="form-group col-6">
                 <label>How many credit hours are you taking this semester?</label>
-                <input type="text" class="form-control" [(ngModel)]="newUser.credit" name="credit">
+                <input type="text" class="form-control" [(ngModel)]="newUser.credit" name="credit" #credit="ngModel" required>
+                <div [hidden]="credit.valid || credit.pristine" class="alert alert-danger">
+                    number of credits required
+                </div>
             </div>
             <div class="form-group col-6">
                 <label>What programming languages are you familiar with?</label>
-                <input type="text" class="form-control" [(ngModel)]="newUser.programmingLanguages" name="languages">
+                <input type="text" class="form-control" [(ngModel)]="newUser.programmingLanguages" name="languages" #languages="ngModel" required>
+                <div [hidden]="languages.valid || languages.pristine" class="alert alert-danger">
+                    known languages required
+                </div>
             </div>
+        </div>
+        <div align="center" style="margin-top:5%">
+            <button (click)="backCounter()" [disabled]="counter<=0" class="btn btn-danger">Back</button>
+            <label>&nbsp; {{counter + 1}} of 5 pages done &nbsp; </label>
+            <button (click)="nextCounter()" [disabled]="schoolYear.invalid || college.invalid || major.invalid || credit.invalid || languages.invalid" class="form-box" class="btn btn-success">Next</button>
         </div>
     </div>
     <div class="form-box" *ngIf="counter == 2">
@@ -143,7 +188,7 @@
                         which events would you be interested in?</label>
                 <div class="form-check" *ngFor="let m of majorEvents;let in = index">
                     <input type="checkbox" class="form-check-input" [(ngModel)]="majorEven[in]" name="majorEvent{{in}}">
-                    <label>{{m}}:{{majorEven[in]}}</label>
+                    <label>{{m}}</label>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input">
@@ -154,7 +199,7 @@
                 <label>I Would be interested in competing in</label>
                 <div class="form-check" *ngFor="let c of competition; let in=index">
                     <input type="checkbox" class="form-check-input" [(ngModel)]="competit[in]" name="competit{{in}}">
-                    <label>{{c}}:{{competit[in]}}</label>
+                    <label>{{c}}</label>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input">
@@ -162,7 +207,14 @@
                 </div>
             </div>
         </div>
+        <div align="center" style="margin-top:5%">
+            <button (click)="backCounter()" class="btn btn-danger">Back</button>
+            <label>&nbsp; {{counter + 1}} of 5 pages done &nbsp; </label>
+            <button (click)="nextCounter()" class="form-box" class="btn btn-success">Next</button>
+        </div>  
     </div>
+
+
     <div class="form-box" *ngIf="counter == 3" align="center">
         <h1 class="display-5">Some special information for you!</h1>
         <p class="col-6" >  We have a slack! What's that? It's a online group of ACM's
@@ -177,10 +229,17 @@
         </p>
         <img src='assets/image.png'>
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" [(ngModel)]="newUser.slackAccept" name="slack">
-            <label >Check box if you totaly read that:{{newUser.slackAccept}}</label>
-        </div>            
+            <input type="checkbox" class="form-check-input" [(ngModel)]="newUser.slackAccept" name="slack" #slack="ngModel" required>
+            <label >Check box if you totaly read that</label>
+        </div>   
+        <div align="center" style="margin-top:5%">
+            <button (click)="backCounter()" class="btn btn-danger">Back</button>
+            <label>&nbsp; {{counter + 1}} of 5 pages done &nbsp; </label>
+            <button (click)="nextCounter()" [disabled]="slack.invalid" class="form-box" class="btn btn-success">Next</button>
+        </div>         
     </div>
+    
+
     <div class="form-box" *ngIf="counter == 4">
         <h1 class="display-5">Payment Receipt</h1>
         <p>You can sign up for National membership or just UIC membership.</p>
@@ -200,13 +259,15 @@
         <p><b>If you paid with cash, Please enter you Receipt number in the box below. If you are 
             a National member, enter your National ACM membership ID below. 
         </b></p>
-        <input type="text" class="form-control col-6">
-    </div>
-    <div align="center" style="margin-top:5%">
-        <button (click)="backCounter()" [disabled]="counter<=0" class="btn btn-danger">Back</button>
-        <label>&nbsp; {{counter + 1}} of 5 pages done &nbsp; </label>
-        <button (click)="nextCounter(counter)" class="form-box" *ngIf="counter<4" class="btn btn-success">Next</button>
-        <button (click)="onSubmit()" class="form-box" *ngIf="counter==4" class="btn btn-success">Submit</button>
+
+        <input type="text" class="form-control col-6" [(ngModel)]="membershipID" name="membership" #membership="ngModel" required>
+        <br>TODO: need to attach this input html to json object
+
+        <div align="center" style="margin-top:5%">
+            <button (click)="backCounter()" class="btn btn-danger">Back</button>
+            <label>&nbsp; {{counter + 1}} of 5 pages done &nbsp; </label>
+            <button (click)="onSubmit()" [disabled]="membership.invalid" class="form-box" class="btn btn-success">Submit</button>
+        </div>  
     </div>
 </form>
 

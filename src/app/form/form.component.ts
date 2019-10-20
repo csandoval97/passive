@@ -10,6 +10,7 @@ import { User } from '../user';
 export class FormComponent implements OnInit {
   
   counter = 0;
+  membershipID="";
   newUser = new User(1,'a','b','c','d','e','f','g','h','i','j','k','l',false,2,3,'m',[],[],[],[],false,4,'r',5);
 
   year:string[] = ["Freshman","Sophomore","Junior","Senior","Grad Masters","Grad PHD","Professor","Alumni","Other"];
